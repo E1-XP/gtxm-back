@@ -1,9 +1,16 @@
 const fs = require('fs'),
     path = require('path');
-
 const db = require('../models');
 
-module.exports.getImages = function (dirPath, dirId = 1) {
+module.exports.getImages = function (req, res) {
+    const { dir } = req.params;
+    const pathParam = path.join(__dirname, `../assets/img/${dir}`);
+
+    getImagesCore(pathParam, dir)
+        .then(images => res.status(200).json({ images }));
+}
+
+function getImagesCore(dirPath, dirId = 1) {
     let imageData = [];
 
     function stepA() {
