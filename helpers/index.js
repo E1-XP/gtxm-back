@@ -2,6 +2,8 @@ const fs = require('fs'),
     path = require('path');
 const db = require('../models');
 
+const getImagesCore = require('./get_likes');
+
 module.exports.getImages = function (req, res) {
     const { dir } = req.params;
     const pathParam = path.join(__dirname, `../assets/img/${dir}`);
@@ -10,41 +12,6 @@ module.exports.getImages = function (req, res) {
         .then(images => res.status(200).json({ images }));
 }
 
-function getImagesCore(dirPath, dirId = 1) {
-    let imageData = [];
+module.exports.getThumbnails = require('./get_thumbs');
 
-    function stepA() {
-        return new Promise((res, rej) => {
-            let files = fs.readdirSync(dirPath);
-            let i = 1 * dirId;
 
-            for (file of files) {
-                let stat = fs.statSync(path.join(dirPath, file));
-
-                if (stat && stat.isFile()) imageData.push({
-                    id: i,
-                    dir: `static/img/${dirId}/${file}`,
-                    likes: 99
-                });
-                i += 1;
-            }
-            res(imageData);
-        });
-    }
-
-    function stepB(data) {
-        function stepB2(data) {
-            return new Promise((res, rej) => {
-                db.Photo.find({}).then(photos => {
-                    //data - original items sended thru promises
-                    data.forEach(el => el.likes = photos.filter(photo => photo.id === el.id));
-                    data.forEach(el => el.likes = el.likes[0].likes);
-                    res(data);
-                });
-            });
-        }
-        return stepB2(data);
-    }
-
-    return stepA().then(stepB);
-}
