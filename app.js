@@ -6,16 +6,16 @@ const express = require('express'),
     PORT = process.env.PORT || 3001;
 
 const db = require('./models');
+const routes = require('./routes');
 const helpers = require('./helpers');
 
 app.use(cors());
 
-app.get('/', (req, res) => res.json({ message: "welcome to the gtxm backend" }));
-
 app.use('/static', express.static(path.join(__dirname, 'assets')));
 
-app.get('/static/img/:dir', helpers.getImages);
-/* //Populate db with image objects
+app.use('/', routes);
+
+/* Populate db with image objects
 for (let i = 1; i <= 108; i += 1) {
     db.Photo.create({
         id: i,
@@ -24,8 +24,8 @@ for (let i = 1; i <= 108; i += 1) {
 
 db.Photo.count({}, function (err, c) {
     console.log('total count: '+c);
-});
-*/
-helpers.getThumbnails(500);
+});*/
+
+helpers.createThumbnails(500);
 //wait for images to resize before playing with api
 app.listen(PORT, () => console.log(`Server is listening on ${PORT}.`));

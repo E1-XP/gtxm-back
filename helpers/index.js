@@ -2,7 +2,11 @@ const fs = require('fs'),
     path = require('path');
 const db = require('../models');
 
-const getImagesCore = require('./get_likes');
+const getImagesCore = require('./get_images');
+
+module.exports.getThumbnails = require('./get_thumbs');
+
+module.exports.createThumbnails = require('./create_thumbs');
 
 module.exports.getImages = function (req, res) {
     const { dir } = req.params;
@@ -11,7 +15,3 @@ module.exports.getImages = function (req, res) {
     getImagesCore(pathParam, dir)
         .then(images => res.status(200).json({ images }));
 }
-
-module.exports.getThumbnails = require('./get_thumbs');
-
-

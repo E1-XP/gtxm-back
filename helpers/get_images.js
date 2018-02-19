@@ -28,8 +28,7 @@ module.exports = function getImagesCore(dirPath, dirId = 1) {
     }
 
     function updateLikesFieldForEachImageDataItem(data) {
-
-        function coreFn(data) {
+        return (function coreFn(data) {
             return new Promise((res, rej) => {
                 db.Photo.find({}).then(photos => {
                     //data - original items send thru promises
@@ -38,8 +37,7 @@ module.exports = function getImagesCore(dirPath, dirId = 1) {
                     res(data);
                 });
             });
-        }
-        return coreFn(data);
+        })(data);
     }
 
     return populateImageDataArrayWithObjects().then(updateLikesFieldForEachImageDataItem);
