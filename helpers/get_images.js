@@ -35,10 +35,10 @@ module.exports = function getImagesCore(dirPath, dirId = 1) {
                     data.forEach(item => item.likes = photos.filter(photo => photo.id === item.id));
                     data.forEach(item => item.likes = item.likes[0].likes);
                     res(data);
-                });
+                }).catch(err => console.log(err));
             });
         })(data);
     }
 
-    return populateImageDataArrayWithObjects().then(updateLikesFieldForEachImageDataItem);
+    return populateImageDataArrayWithObjects().then(updateLikesFieldForEachImageDataItem).catch(err => console.log(err));
 }
