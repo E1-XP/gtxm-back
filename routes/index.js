@@ -7,4 +7,6 @@ router.get('/static/img/thumbnails', helpers.getThumbnails);
 
 router.get('/static/img/:dir', helpers.getImages);
 
+router.post(`/likes/new/:loadedPart/:currentImage`, helpers.setLikes);
+
 module.exports = router;

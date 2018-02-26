@@ -6,6 +6,8 @@ const getImagesCore = require('./get_images');
 
 module.exports.getThumbnails = require('./get_thumbs');
 
+module.exports.setLikes = require('./set_likes');
+
 module.exports.createThumbnails = require('./create_thumbs');
 
 module.exports.getImages = function (req, res) {

@@ -2,7 +2,7 @@ module.exports = function getThumbnails(req, res) {
     const images = [[
         `static/img/thumbnails/1/71h71-thumbnail.jpg`,
         `static/img/thumbnails/1/F2005a2-thumbnail.jpg`,
-        `static/img/thumbnails/1/WECS16a3-thumbnail.jpg`
+        `static/img/thumbnails/1/WECS15a3-thumbnail.jpg`
     ],
     [
         `static/img/thumbnails/2/bt52Mo-thumbnail.jpg`,
