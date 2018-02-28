@@ -26,6 +26,6 @@ db.Photo.count({}, function (err, c) {
     console.log('total count: '+c);
 });*/
 
-helpers.createThumbnails(500);
+//helpers.createThumbnails(500);
 //wait for images to resize before playing with api
 app.listen(PORT, () => console.log(`Server is listening on ${PORT}.`));
