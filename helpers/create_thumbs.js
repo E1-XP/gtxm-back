@@ -4,7 +4,7 @@ const fs = require('fs'),
 
 module.exports = function createThumbnails(width) {
 
-    for (let i = 1; i <= 4; i += 1) {
+    for (let i = 1; i <= 5; i += 1) {
         const dirPath = path.join(__dirname, `../assets/img/${i}`);
 
         let files = fs.readdirSync(dirPath);
