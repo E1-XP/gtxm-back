@@ -21,13 +21,16 @@ function getImagesCore(dirPath, dirId = 1) {
 
       for (file of files) {
         let stat = fs.statSync(path.join(dirPath, file));
+        const baseURL = "static/img/";
         const thumbName = file.split(".")[0].concat("-thumbnail.jpg");
+        const lazyName = file.split(".")[0].concat("-lazy.jpg");
 
         if (stat && stat.isFile())
           imageData.push({
             id: i,
-            dir: `static/img/${dirId}/${file}`,
-            thumbnail: `static/img/thumbnails/${dirId}/${thumbName}`,
+            dir: `${baseURL}${dirId}/${file}`,
+            thumbnail: `${baseURL}thumbnails/${dirId}/${thumbName}`,
+            lazy: `${baseURL}thumbnails/${dirId}/${lazyName}`,
             likes: 99
           });
 
